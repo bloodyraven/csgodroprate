@@ -15,8 +15,6 @@ public class Main {
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		f.setLocationRelativeTo(null);
 		f.setVisible(true);
-		
-//		new Game();
 	}
 	
 }

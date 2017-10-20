@@ -8,5 +8,6 @@ public class Constantes {
 	public static final String VERIFY_PARAMETERS_RIGHT = "Erreur, veuillez vérifier vos enregistrements.";
 	public static final String VERIFY_PARAMETERS_LEFT = "Erreur, veuillez vérifier les informations.";
 	public static final String ONE_CASE_AT_LEAST = "Vous devez ouvrir au moins une caisse.";
+	public static final String PATH_EMPTY = "Vous devez renseigner le chemin de stockage pour le fichier.";
 	
 }

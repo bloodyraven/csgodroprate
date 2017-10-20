@@ -57,6 +57,10 @@ public class InputPanel extends JPanel {
 					JOptionPane.showMessageDialog(null, Constantes.NOT_100_PERCENT, "", JOptionPane.WARNING_MESSAGE);
 					return;
 				}
+				if(ib.getPath()==null || ib.getPath().equals("")) {
+					JOptionPane.showMessageDialog(null, Constantes.PATH_EMPTY, "", JOptionPane.WARNING_MESSAGE);
+					return;
+				}
 				new Treatment(f, wlp.getWeaponBeans(), ip.getInfoBean());
 			}
 		});

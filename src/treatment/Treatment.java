@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.swing.JFrame;
 
+import logger.Logger;
 import bean.InfoBean;
 import bean.RecapBean;
 import bean.WeaponBean;
@@ -19,24 +20,28 @@ public class Treatment {
 	private double realMoneyput = 0;
 	private int nbOpen = 0;
 	
-	//TODO LOGGER & replace sysou
-
+	private Logger log;
+	
 	public Treatment(JFrame f, List<WeaponBean> weaponBeanList, InfoBean ib) {
 		this.setF(f);
 		this.setWeaponBeanList(weaponBeanList);
 		this.setIb(ib);
+		log = new Logger(ib.getPath());
 		
 		while(nbOpen < ib.getNombreCaisseToOpen()) {
 			openCase();
 		}
-		System.out.println("argent dépensé :"+String.format( "%.2f", realMoneyput)+" wallet:"+String.format( "%.2f", wallet));
+		log.write("Argent dépensé :"+String.format( "%.2f", realMoneyput)+" Wallet:"+String.format( "%.2f", wallet));
 	}
 	
 	private void openCase() {
+		log.write("----------\nOuverture Caisse");
 		nbOpen ++;
 		if(ib.getPrixCaisse()<=wallet) {
+			log.write("Achat caisse avec le wallet : "+ib.getPrixCaisse());
 			wallet-=ib.getPrixCaisse();
 		} else {
+			log.write("Achat caisse avec argent réel : "+wallet+(ib.getPrixCaisse()-wallet));
 			realMoneyput+=wallet+(ib.getPrixCaisse()-wallet);
 		}
 		double montantGagne=0.0;
@@ -45,11 +50,13 @@ public class Treatment {
 		for (WeaponBean weaponBean : weaponBeanList) {
 			cumul += weaponBean.getDroprate();
 			if(cumul>r) {
+				log.write("Gain de "+weaponBean.getAmout()+" : "+weaponBean.getName());
 				montantGagne=weaponBean.getAmout();
 				break;
 			}
 		}
 		wallet+=montantGagne;
+		log.write("Wallet : "+wallet+"----------\n");
 	}
 
 	public JFrame getF() {
